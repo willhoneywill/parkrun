@@ -17,4 +17,12 @@ table#results {
   display: none;
 }
 
+.parkrun-letter {
+  font-size: 1.5em;
+}
+.parkrun-letter.parkrun-letter--none {
+  color: #f00;
+  font-size: 1em;
+}
+
 /*# sourceMappingURL=style-index.css.map*/

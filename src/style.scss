@@ -5,6 +5,7 @@
  * Replace them with your own styles or remove the file completely.
  */
 
+
 .wp-block-create-block-parkrun {
 	background-color: #21759b;
 	color: #fff;
@@ -13,4 +14,11 @@
 
 table#results {
 	display: none;
+}
+
+.parkrun-letter {
+	font-size: 1.5em;
+	&.parkrun-letter--none {
+		color: #f00;
+	}
 }

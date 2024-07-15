@@ -23,7 +23,6 @@ export function tableToJson(table) {
 
     for (var k=0; k<iLen; k++) {
       obj[propNames[k]] = cells[k].textContent || cells[k].innerText;
-      console.log(cells[k].innerHTML);
       if (cells[k].innerHTML.includes('<a href')) {
         countryUrl = extractCountryUrl(cells[k].innerHTML);
       }
@@ -50,7 +49,6 @@ export function getUniqueEventsAndCount(results) {
 export function getUniqueCountryEventsAndCount(results) {
   let uniqueEvents = {};
   results.forEach(result => {
-    console.log(result);
     if (uniqueEvents[result.Country]) {
       uniqueEvents[result.Country]++;
     } else {

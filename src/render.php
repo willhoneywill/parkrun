@@ -1,7 +1,10 @@
 <?php
 
+$will = "https://www.parkrun.org.uk/parkrunner/896578/all/";
+$secil = "https://www.parkrun.org.uk/parkrunner/7133832/all/";
+
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://www.parkrun.org.uk/parkrunner/896578/all/");
+curl_setopt($ch, CURLOPT_URL, $secil);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
 $html = curl_exec($ch);
@@ -29,7 +32,7 @@ $allResults .= "</table>";
  ?>
 
 <div id="weberino-parkrun"></div>
-
+<div id="content"></div>
 <div id="parkrun-results">
     <?php
         echo $allResults;   

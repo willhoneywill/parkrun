@@ -3,12 +3,11 @@ import { tableToJson } from './utils/results';
 import PieChart from './charts/PieChart';
 import MyParkRuns from './components/MyParkRuns';
 import MyCountries from './components/MyCountries';
+import Alphabet from './components/Alphabet';
 
 
 let table = document.querySelector('table#results');
 let results = tableToJson(table);
-console.log(table);
-
 
 function AllParkRunStats() {
   return <>
@@ -16,6 +15,7 @@ function AllParkRunStats() {
     <PieChart results={results} />
     <MyParkRuns results={results} />
     <MyCountries results={results} />
+    <Alphabet results={results} />
   </>;
 }
 

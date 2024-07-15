@@ -42,6 +42,39 @@ function PieChart({
 
 /***/ }),
 
+/***/ "./src/components/Alphabet/index.js":
+/*!******************************************!*\
+  !*** ./src/components/Alphabet/index.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Alphabet)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_results__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/results */ "./src/utils/results.js");
+/* harmony import */ var _utils_events__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/events */ "./src/utils/events.js");
+
+
+
+function Alphabet({
+  results
+}) {
+  const uniqueEventsAndCount = (0,_utils_results__WEBPACK_IMPORTED_MODULE_1__.getUniqueEventsAndCount)(results);
+  const alphabet = Array.from({
+    length: 26
+  }, (_, i) => String.fromCharCode(65 + i));
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "I have completed the following events in the unoffical Parkrun alphabet challenge"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ul", null, alphabet.map(letter => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
+    key: letter
+  }, " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+    className: "parkrun-letter parkrun-letter--none" + (0,_utils_events__WEBPACK_IMPORTED_MODULE_2__.parkrunWithThisLetter)(letter, uniqueEventsAndCount)
+  }, " ", letter, " "), " - ", (0,_utils_events__WEBPACK_IMPORTED_MODULE_2__.parkrunWithThisLetter)(letter, uniqueEventsAndCount)))));
+}
+
+/***/ }),
+
 /***/ "./src/components/MyCountries/index.js":
 /*!*********************************************!*\
   !*** ./src/components/MyCountries/index.js ***!
@@ -55,6 +88,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _utils_results__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/results */ "./src/utils/results.js");
+/* harmony import */ var _utils_countries__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/countries */ "./src/utils/countries.js");
+
 
 
 function MyCountries({
@@ -65,7 +100,9 @@ function MyCountries({
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "I have run Parkrun in ", uniqueEvents, " different Parkrun countries"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("ol", null, Object.keys(uniqueEventsAndCount).map(event => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("li", {
       key: event
-    }, event);
+    }, (0,_utils_countries__WEBPACK_IMPORTED_MODULE_2__.getCountryName)(event), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+      class: "fi fi-gr"
+    }));
   })));
 }
 
@@ -96,6 +133,51 @@ function MyParkRuns({
       key: event
     }, event);
   })));
+}
+
+/***/ }),
+
+/***/ "./src/utils/countries.js":
+/*!********************************!*\
+  !*** ./src/utils/countries.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getCountryName: () => (/* binding */ getCountryName)
+/* harmony export */ });
+function getCountryName(url) {
+  const countries = {
+    'www.parkrun.ie': 'Ireland',
+    'www.parkrun.com.de': 'Germany',
+    'www.parkrun.org.uk': 'United Kingdom',
+    'www.parkrun.pl': 'Poland',
+    'www.parkrun.co.nl': 'Netherlands',
+    'www.parkrun.co.at': 'Austria'
+  };
+  return countries[url];
+}
+
+/***/ }),
+
+/***/ "./src/utils/events.js":
+/*!*****************************!*\
+  !*** ./src/utils/events.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   parkrunWithThisLetter: () => (/* binding */ parkrunWithThisLetter)
+/* harmony export */ });
+function parkrunWithThisLetter(letter, uniqueEventsAndCount) {
+  console.log(uniqueEventsAndCount);
+  const events = Object.keys(uniqueEventsAndCount).filter(event => event.startsWith(letter));
+  if (events.length === 0) {
+    return '';
+  }
+  return events.join(', ');
 }
 
 /***/ }),
@@ -136,7 +218,6 @@ function tableToJson(table) {
     obj = {};
     for (var k = 0; k < iLen; k++) {
       obj[propNames[k]] = cells[k].textContent || cells[k].innerText;
-      console.log(cells[k].innerHTML);
       if (cells[k].innerHTML.includes('<a href')) {
         countryUrl = extractCountryUrl(cells[k].innerHTML);
       }
@@ -162,7 +243,6 @@ function getUniqueEventsAndCount(results) {
 function getUniqueCountryEventsAndCount(results) {
   let uniqueEvents = {};
   results.forEach(result => {
-    console.log(result);
     if (uniqueEvents[result.Country]) {
       uniqueEvents[result.Country]++;
     } else {
@@ -1110,6 +1190,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _charts_PieChart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./charts/PieChart */ "./src/charts/PieChart/index.js");
 /* harmony import */ var _components_MyParkRuns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/MyParkRuns */ "./src/components/MyParkRuns/index.js");
 /* harmony import */ var _components_MyCountries__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/MyCountries */ "./src/components/MyCountries/index.js");
+/* harmony import */ var _components_Alphabet__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Alphabet */ "./src/components/Alphabet/index.js");
+
 
 
 
@@ -1118,13 +1200,14 @@ __webpack_require__.r(__webpack_exports__);
 
 let table = document.querySelector('table#results');
 let results = (0,_utils_results__WEBPACK_IMPORTED_MODULE_2__.tableToJson)(table);
-console.log(table);
 function AllParkRunStats() {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", null, "My Parkrun Stats"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_charts_PieChart__WEBPACK_IMPORTED_MODULE_3__["default"], {
     results: results
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_MyParkRuns__WEBPACK_IMPORTED_MODULE_4__["default"], {
     results: results
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_MyCountries__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    results: results
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_Alphabet__WEBPACK_IMPORTED_MODULE_6__["default"], {
     results: results
   }));
 }
